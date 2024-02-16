@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import KakaoLoginComponent from './components/KakaoLoginComponent';
+import UserInfoComponent from './components/UserInfoComponent';
 
-function App() {
+const App = () => {
+  // 서버로부터 받은 토큰 상태 관리
+  const [serverToken, setServerToken] = useState('');
+
+  // 카카오 로그인 후 받은 토큰을 설정하는 함수
+  const handleSetToken = (token) => {
+    setServerToken(token);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Kakao Login</h1>
+      <KakaoLoginComponent onSetToken={handleSetToken} />
+      <hr />
+      <h1>User Information</h1>
+      <UserInfoComponent serverToken={serverToken} />
     </div>
   );
-}
+};
 
 export default App;
